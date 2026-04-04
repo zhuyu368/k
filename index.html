@@ -576,10 +576,11 @@ body {
 }
 
 .message-content {
-  max-width: 70%;
+  max-width: 85%;
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: 40px;
 }
 
 .message-container.self .message-content {
@@ -623,9 +624,22 @@ body {
   opacity: 0.6;
   margin-top: 4px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+
+
+.message-status {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 /* 修改：消息操作菜单样式优化 */
@@ -2543,13 +2557,17 @@ input:checked + .slider:before {
     text-align: center;
     padding: 6px 12px !important;
     margin: 4px auto !important;
-    max-width: 70% !important;
+    max-width: 90% !important;           /* 允许宽度最大为父容器的90% */
+    width: fit-content !important;        /* 宽度自适应内容 */
     border-radius: 20px !important;
     backdrop-filter: blur(2px) !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
     cursor: default !important;
     transition: all 0.2s ease !important;
+    white-space: normal !important;       /* 允许换行 */
+    word-wrap: break-word !important;     /* 长单词换行 */
+    display: inline-block !important;     /* 使宽度根据内容调整 */
 }
 
 .poke-message .message-time {
@@ -3288,6 +3306,177 @@ input:checked + .slider:before {
 .night-mode .typing-indicator .dot {
   background-color: #e0e0e0 !important;
 }
+/* 主题和气泡主题卡片样式 */
+
+/* ===== K气泡样式（绿色玻璃气泡带贴图） ===== */
+.bubble-k .message {
+    box-shadow: none !important;
+    border-width: 0 !important;
+    font-weight: 500 !important;
+    position: relative;
+    overflow: visible !important;
+}
+
+/* K - 对方消息（接收气泡） */
+.bubble-k .message.other {
+    position: relative !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    padding: 8px 10px 8px 10px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    min-width: 0px !important;
+    min-height: 0px !important;
+    background-color: transparent !important;
+    background-image: linear-gradient(0deg, rgba(90, 99, 83, 1), rgba(90, 99, 83, 1)) !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.18), inset 0px 0px 60px rgba(255, 255, 255, 0), inset 0px 0px 60px rgba(0, 0, 0, 0) !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
+    line-height: 1.55 !important;
+    letter-spacing: 0.02em !important;
+    word-break: break-word !important;
+    z-index: 10 !important;
+    border: 4.5px solid rgba(255, 255, 255, 0.95) !important;
+    outline: 0px solid rgba(207, 207, 207, 0.32) !important;
+    outline-offset: 0px !important;
+}
+
+/* K - 对方消息左下角贴图 */
+.bubble-k .message.other::after {
+    content: '' !important;
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-image: url('https://s41.ax1x.com/2026/04/03/peYQOdP.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    opacity: 1 !important;
+    bottom: 0;
+    z-index: 20 !important;
+    pointer-events: none !important;
+    right: 0;
+    transform: translate(21.5px, 36.5px) rotate(-9deg) !important;
+}
+
+/* K - 对方消息右上角贴图 */
+.bubble-k .message.other::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 51px !important;
+    height: 51px !important;
+    background-image: url('https://s41.ax1x.com/2026/04/03/peYQXIf.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    opacity: 1 !important;
+    top: 0;
+    z-index: 20 !important;
+    pointer-events: none !important;
+    border: none !important;
+    background-color: transparent !important;
+    left: 0;
+    transform: translate(-18.5px, -35px) rotate(0deg) !important;
+}
+
+/* K - 自己消息（发送气泡） */
+.bubble-k .message.self {
+    position: relative !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    padding: 8px 10px 8px 10px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    min-width: 0px !important;
+    min-height: 0px !important;
+    background-color: transparent !important;
+    background-image: linear-gradient(0deg, rgba(90, 99, 83, 1), rgba(90, 99, 83, 1)) !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.18), inset 0px 0px 60px rgba(255, 255, 255, 0), inset 0px 0px 60px rgba(0, 0, 0, 0) !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
+    line-height: 1.55 !important;
+    letter-spacing: 0.02em !important;
+    word-break: break-word !important;
+    z-index: 10 !important;
+    border: 4.5px solid rgba(255, 255, 255, 0.95) !important;
+    outline: 0px solid rgba(207, 207, 207, 0.32) !important;
+    outline-offset: 0px !important;
+}
+
+/* K - 自己消息左下角贴图 */
+.bubble-k .message.self::after {
+    content: '' !important;
+    position: absolute !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-image: url('https://s41.ax1x.com/2026/04/03/peYQOdP.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    opacity: 1 !important;
+    bottom: 0;
+    z-index: 20 !important;
+    pointer-events: none !important;
+    left: 0;
+    transform: translate(-28px, 36.5px) rotate(-9deg) !important;
+}
+
+/* K - 自己消息右上角贴图 */
+.bubble-k .message.self::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 53px !important;
+    height: 53px !important;
+    background-image: url('https://s41.ax1x.com/2026/04/03/peYQXIf.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    opacity: 1 !important;
+    top: 0;
+    z-index: 20 !important;
+    pointer-events: none !important;
+    border: none !important;
+    background-color: transparent !important;
+    right: 0;
+    transform: translate(29.5px, -42.5px) rotate(0deg) !important;
+}
+
+/* K主题下头像间距调整 */
+.bubble-k .message-container .message-avatar {
+    margin-right: 0 !important;
+    margin-left: 6px !important;
+}
+
+/* K主题下消息容器间距调整 */
+.bubble-k .message-container {
+    align-items: flex-start !important;
+    margin-bottom: 53px !important;
+}
+
+/* 夜间模式下K主题适配 */
+.night-mode .bubble-k .message.other,
+.night-mode .bubble-k .message.self {
+    filter: brightness(0.85);
+}
+
+.night-mode .bubble-k .message.other::after,
+.night-mode .bubble-k .message.self::after,
+.night-mode .bubble-k .message.other::before,
+.night-mode .bubble-k .message.self::before {
+    filter: brightness(0.85);
+}
 </style>
 </head>
 <body>
@@ -3430,9 +3619,11 @@ input:checked + .slider:before {
     <button class="tab-button" data-tab="communication">通话视频</button>
     <button class="tab-button" data-tab="group">群聊功能</button>
     <button class="tab-button" data-tab="music">音乐播放</button>
-    <!-- 新增拍一拍设置标签 -->
-    <button class="tab-button" data-tab="poke">👋 拍一拍设置</button>
-    <button class="tab-button" data-tab="data">数据管理</button>
+<!-- 新增主题和气泡主题标签 -->
+<button class="tab-button" data-tab="theme">🫧 主题和气泡</button>
+<!-- 新增拍一拍设置标签 -->
+<button class="tab-button" data-tab="poke">👋 拍一拍设置</button>
+<button class="tab-button" data-tab="data">数据管理</button>
   </div>
   
   <!-- 右侧可滑动内容区域，所有模块作为可折叠卡片 - 默认收起 -->
@@ -3563,22 +3754,22 @@ input:checked + .slider:before {
               <option value="3600000">1小时</option>
             </select>
           </div>
-          <!-- 新增：回复最短等待时间 -->
-          <div class="ratio-item">
-            <div class="ratio-label">
-              <span>回复最短等待时间</span>
-              <span class="ratio-value" id="minDelayValue">1.5秒</span>
-            </div>
-            <input type="range" min="0.1" max="10" step="0.1" value="1.5" class="ratio-slider" id="minDelaySlider">
-          </div>
-          <!-- 新增：回复最长等待时间 -->
-          <div class="ratio-item">
-            <div class="ratio-label">
-              <span>回复最长等待时间</span>
-              <span class="ratio-value" id="maxDelayValue">3.5秒</span>
-            </div>
-            <input type="range" min="0.1" max="10" step="0.1" value="3.5" class="ratio-slider" id="maxDelaySlider">
-          </div>
+          <!-- 新增：回复最短等待时间（单位：秒） -->
+<div class="ratio-item">
+  <div class="ratio-label">
+    <span>回复最短等待时间</span>
+    <span class="ratio-value" id="minDelayValue">1.5秒</span>
+  </div>
+  <input type="range" min="0.1" max="10" step="0.1" value="1.5" class="ratio-slider" id="minDelaySlider">
+</div>
+<!-- 新增：回复最长等待时间（单位：分钟，上限3分钟） -->
+<div class="ratio-item">
+  <div class="ratio-label">
+    <span>回复最长等待时间</span>
+    <span class="ratio-value" id="maxDelayValue">3分钟</span>
+  </div>
+  <input type="range" min="0.1" max="3" step="0.1" value="3" class="ratio-slider" id="maxDelaySlider">
+</div>
         </div>
       </div>
     </div>
@@ -3936,6 +4127,28 @@ input:checked + .slider:before {
         </div>
       </div>
     </div>
+    <!-- ===== 主题和气泡主题模块 ===== -->
+    <div class="settings-section-card" id="section-theme" data-tab="theme">
+      <div class="settings-section-header collapsed" onclick="toggleSection('theme')">
+        <span>🎨 主题和气泡主题</span>
+        <i class="material-icons" id="icon-theme">expand_more</i>
+      </div>
+      <div class="settings-section-content collapsed" id="content-theme">
+        <p>选择你喜欢的主题风格（仅白天模式生效）</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;" id="themeGrid">
+          <!-- 主题卡片会动态渲染到这里 -->
+        </div>
+        <div style="padding: 10px; background: rgba(0,0,0,0.02); border-radius: 6px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <span>当前主题</span>
+          <span id="currentThemeName" style="font-weight: 500;">默认主题</span>
+        </div>
+        <button class="save-background-btn" id="saveThemeBtn" style="margin-top: 12px;">保存主题</button>
+        <div style="font-size: 0.75rem; opacity: 0.7; padding: 8px; margin-top: 8px;">
+          <p>✨ 点击卡片预览，保存后生效</p>
+          <p>💡 夜间模式下自动恢复默认样式</p>
+        </div>
+      </div>
+    </div>
     <!-- ===== 数据管理模块结束 ===== -->
     
   </div> <!-- end settings-content-vertical -->
@@ -4027,14 +4240,14 @@ class ChatDataManager {
         });
         
         // 默认发送设置
-        this.setStoredData(this.SEND_SETTINGS_KEY, {
-            stickerRatio: 50,
-            phraseRatio: 50,
-            maxMessageCount: 3,
-            autoSendFrequency: 600000,
-            minReplyDelay: 1.5,
-            maxReplyDelay: 3.5
-        });
+this.setStoredData(this.SEND_SETTINGS_KEY, {
+    stickerRatio: 50,
+    phraseRatio: 50,
+    maxMessageCount: 3,
+    autoSendFrequency: 600000,
+    minReplyDelay: 1.5,
+    maxReplyDelayMinutes: 3  // 单位：分钟，上限3分钟
+});
         
         // 默认外观设置
         this.setStoredData(this.APPEARANCE_KEY, {
@@ -4096,11 +4309,11 @@ class ChatDataManager {
         });
 
         // 默认拍一拍设置
-        this.setStoredData(this.POKE_SETTINGS_KEY, {
-            enabled: true,
-            frequency: 20,
-            phrases: ["拍了拍你", "拍了拍我的肩膀", "拍了拍我的脑袋", "戳了戳我", "轻轻碰了碰我"]
-        });
+this.setStoredData(this.POKE_SETTINGS_KEY, {
+    enabled: true,
+    frequency: 50,  // 把 20 改成 50 更容易测试
+    phrases: ["拍了拍你", "拍了拍我的肩膀", "拍了拍我的脑袋", "戳了戳我", "轻轻碰了碰我", "摸了摸我的头", "捏了捏我的脸"]
+});
         
         // 默认回复词条
         this.setStoredData(this.PHRASES_KEY, [
@@ -4365,15 +4578,25 @@ class ChatDataManager {
     
     // ---- 发送设置 ----
     getSendSettings() {
-        return this.getStoredData(this.SEND_SETTINGS_KEY) || {
-            stickerRatio: 50,
-            phraseRatio: 50,
-            maxMessageCount: 3,
-            autoSendFrequency: 600000,
-            minReplyDelay: 1.5,
-            maxReplyDelay: 3.5
-        };
+    const settings = this.getStoredData(this.SEND_SETTINGS_KEY);
+    if (settings) {
+        // 兼容旧数据：如果存在旧的maxReplyDelay（秒），转换为分钟
+        if (settings.maxReplyDelay && !settings.maxReplyDelayMinutes) {
+            settings.maxReplyDelayMinutes = Math.min(3, settings.maxReplyDelay / 60);
+            if (settings.maxReplyDelayMinutes < 0.1) settings.maxReplyDelayMinutes = 3;
+            delete settings.maxReplyDelay;
+        }
+        return settings;
     }
+    return {
+        stickerRatio: 50,
+        phraseRatio: 50,
+        maxMessageCount: 3,
+        autoSendFrequency: 600000,
+        minReplyDelay: 1.5,
+        maxReplyDelayMinutes: 3
+    };
+}
     
     saveSendSettings(settings) {
         return this.setStoredData(this.SEND_SETTINGS_KEY, settings);
@@ -4662,14 +4885,36 @@ class ChatApp {
         ];
         
         this.PRESET_MODES = {
-            quiet: { name: '安静模式', overallFrequency: 10, callPreference: 30, minInterval: 45, maxInterval: 120 },
-            daily: { name: '日常模式', overallFrequency: 30, callPreference: 50, minInterval: 20, maxInterval: 60 },
-            intimate: { name: '亲密模式', overallFrequency: 50, callPreference: 70, minInterval: 10, maxInterval: 30 },
-            custom: { name: '自定义' }
-        };
-        
-        // 状态选项
-        this.statusOptions = [
+    quiet: { name: '安静模式', overallFrequency: 10, callPreference: 30, minInterval: 45, maxInterval: 120 },
+    daily: { name: '日常模式', overallFrequency: 30, callPreference: 50, minInterval: 20, maxInterval: 60 },
+    intimate: { name: '亲密模式', overallFrequency: 50, callPreference: 70, minInterval: 10, maxInterval: 30 },
+    custom: { name: '自定义' }
+};
+
+// 主题配置
+this.themePresets = {
+    default: {
+        id: 'default',
+        name: '默认主题',
+        previewGradient: 'linear-gradient(135deg, #bfbfbf 0%, #b0b0b0 100%)',
+        rootVars: {}
+    },
+// 在 themePresets 对象中添加新主题
+K: {
+    id: 'K',
+    name: 'K',
+    previewGradient: 'linear-gradient(135deg, #5a6353 0%, #4a5245 100%)',
+    bubbleClass: 'bubble-k'
+}
+    
+};
+
+// 添加主题相关状态
+this.currentTheme = 'default';
+this.savedTheme = localStorage.getItem('customTheme') || 'default';
+
+// 状态选项
+this.statusOptions = [
             { text: '在DR', class: 'dr', color: '#2196f3' },
             { text: '在CR', class: 'cr', color: '#9c27b0' },
             { text: '在线', class: 'online', color: '#4caf50' },
@@ -4952,10 +5197,14 @@ class ChatApp {
         this.initAppearanceSettingsUI();
         this.initCommunicationSettingsUI();
         this.initActiveCallSettingsUI();
-        this.initMusicSettingsUI();
-        this.renderPokeUI(); // 新增拍一拍UI
-        
-        this.updateStickerCount();
+      this.initMusicSettingsUI();
+this.renderPokeUI(); // 新增拍一拍UI
+
+// 初始化主题功能
+this.initThemeCards();
+this.loadSavedTheme();
+
+this.updateStickerCount();
         this.updatePhraseCount();
         this.updateTarotPhraseCount();
     }
@@ -5587,24 +5836,27 @@ class ChatApp {
             autoSendFrequency.value = this.appData.sendSettings.autoSendFrequency || 600000;
         }
         
-        // 新增：最短/最长延迟滑块初始化
-        const minDelaySlider = document.getElementById('minDelaySlider');
-        const maxDelaySlider = document.getElementById('maxDelaySlider');
-        const minDelayValue = document.getElementById('minDelayValue');
-        const maxDelayValue = document.getElementById('maxDelayValue');
+        // 新增：最短/最长延迟滑块初始化（最长等待时间单位：分钟）
+const minDelaySlider = document.getElementById('minDelaySlider');
+const maxDelaySlider = document.getElementById('maxDelaySlider');
+const minDelayValue = document.getElementById('minDelayValue');
+const maxDelayValue = document.getElementById('maxDelayValue');
 
-        if (minDelaySlider && this.appData.sendSettings) {
-            minDelaySlider.value = this.appData.sendSettings.minReplyDelay || 1.5;
-        }
-        if (maxDelaySlider && this.appData.sendSettings) {
-            maxDelaySlider.value = this.appData.sendSettings.maxReplyDelay || 3.5;
-        }
-        if (minDelayValue && this.appData.sendSettings) {
-            minDelayValue.textContent = `${(this.appData.sendSettings.minReplyDelay || 1.5).toFixed(1)}秒`;
-        }
-        if (maxDelayValue && this.appData.sendSettings) {
-            maxDelayValue.textContent = `${(this.appData.sendSettings.maxReplyDelay || 3.5).toFixed(1)}秒`;
-        }
+if (minDelaySlider && this.appData.sendSettings) {
+    minDelaySlider.value = this.appData.sendSettings.minReplyDelay || 1.5;
+}
+if (maxDelaySlider && this.appData.sendSettings) {
+    // 读取存储的值（以分钟为单位），如果没有则默认3分钟
+    const storedMaxDelayMinutes = this.appData.sendSettings.maxReplyDelayMinutes || 3;
+    maxDelaySlider.value = storedMaxDelayMinutes;
+}
+if (minDelayValue && this.appData.sendSettings) {
+    minDelayValue.textContent = `${(this.appData.sendSettings.minReplyDelay || 1.5).toFixed(1)}秒`;
+}
+if (maxDelayValue && this.appData.sendSettings) {
+    const minutes = this.appData.sendSettings.maxReplyDelayMinutes || 3;
+    maxDelayValue.textContent = `${minutes.toFixed(1)}分钟`;
+}
     }
     
     initAppearanceSettingsUI() {
@@ -6331,8 +6583,9 @@ class ChatApp {
         this.renderMessages();
         
         const minDelay = (this.appData.sendSettings?.minReplyDelay || 1.5) * 1000;
-        const maxDelay = (this.appData.sendSettings?.maxReplyDelay || 3.5) * 1000;
-        const delay = minDelay + Math.random() * (maxDelay - minDelay);
+const maxDelayMinutes = this.appData.sendSettings?.maxReplyDelayMinutes || 3;
+const maxDelay = maxDelayMinutes * 60 * 1000;
+const delay = minDelay + Math.random() * (maxDelay - minDelay);
         
         setTimeout(() => {
             this.appData.isTyping = false;
@@ -7838,31 +8091,39 @@ class ChatApp {
         }
         
         // 夜间模式切换
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                document.documentElement.classList.toggle('night-mode');
-                const icon = themeToggle.querySelector('i');
-                if (icon) icon.textContent = document.documentElement.classList.contains('night-mode') ? 'light_mode' : 'dark_mode';
-                
-                const isNightMode = document.documentElement.classList.contains('night-mode');
-                localStorage.setItem('night_mode_enabled', isNightMode ? 'true' : 'false');
-                
-                if (isNightMode) {
-                    document.body.style.backgroundColor = '#0a0a0a';
-                    document.documentElement.style.backgroundColor = '#0a0a0a';
-                    const bgContainer = document.getElementById('backgroundContainer');
-                    if (bgContainer && bgContainer.style.backgroundImage) {
-                        bgContainer.style.filter = 'brightness(0.15) contrast(1.2)';
-                    }
-                } else {
-                    document.body.style.backgroundColor = '';
-                    document.documentElement.style.backgroundColor = '';
-                    const bgContainer = document.getElementById('backgroundContainer');
-                    if (bgContainer) bgContainer.style.filter = '';
-                }
-            });
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('night-mode');
+        const icon = themeToggle.querySelector('i');
+        if (icon) icon.textContent = document.documentElement.classList.contains('night-mode') ? 'light_mode' : 'dark_mode';
+        
+        const isNightMode = document.documentElement.classList.contains('night-mode');
+        localStorage.setItem('night_mode_enabled', isNightMode ? 'true' : 'false');
+        
+        if (isNightMode) {
+            document.body.style.backgroundColor = '#0a0a0a';
+            document.documentElement.style.backgroundColor = '#0a0a0a';
+            const bgContainer = document.getElementById('backgroundContainer');
+            if (bgContainer && bgContainer.style.backgroundImage) {
+                bgContainer.style.filter = 'brightness(0.15) contrast(1.2)';
+            }
+            // 夜间模式：重置主题样式
+            this.resetThemePreview();
+        } else {
+            document.body.style.backgroundColor = '';
+            document.documentElement.style.backgroundColor = '';
+            const bgContainer = document.getElementById('backgroundContainer');
+            if (bgContainer) bgContainer.style.filter = '';
+            // 白天模式：恢复已保存的主题
+            if (this.savedTheme !== 'default' && this.themePresets[this.savedTheme]) {
+                this.applyThemePreview(this.savedTheme);
+            } else {
+                this.resetThemePreview();
+            }
         }
+    });
+}
         
         const overlay = document.getElementById('settingsOverlay');
         if (overlay) overlay.addEventListener('click', () => this.closeSettingsPanel());
@@ -8023,29 +8284,34 @@ class ChatApp {
             });
         }
 
-        // 新增：最长等待时间滑块
-        const maxDelaySlider = document.getElementById('maxDelaySlider');
-        if (maxDelaySlider) {
-            maxDelaySlider.addEventListener('input', (e) => {
-                const val = parseFloat(e.target.value);
-                const display = document.getElementById('maxDelayValue');
-                if (display) display.textContent = `${val.toFixed(1)}秒`;
-                
-                if (!this.appData.sendSettings) this.appData.sendSettings = {};
-                this.appData.sendSettings.maxReplyDelay = val;
-                
-                // 如果最大值小于最小值，自动同步最小值
-                if (this.appData.sendSettings.minReplyDelay > val) {
-                    this.appData.sendSettings.minReplyDelay = val;
-                    const minSlider = document.getElementById('minDelaySlider');
-                    const minDisplay = document.getElementById('minDelayValue');
-                    if (minSlider) minSlider.value = val;
-                    if (minDisplay) minDisplay.textContent = `${val.toFixed(1)}秒`;
-                }
-                
-                this.saveAllData();
-            });
+        // 新增：最长等待时间滑块（单位：分钟）
+const maxDelaySlider = document.getElementById('maxDelaySlider');
+if (maxDelaySlider) {
+    maxDelaySlider.addEventListener('input', (e) => {
+        const valMinutes = parseFloat(e.target.value);
+        const display = document.getElementById('maxDelayValue');
+        if (display) display.textContent = `${valMinutes.toFixed(1)}分钟`;
+        
+        if (!this.appData.sendSettings) this.appData.sendSettings = {};
+        this.appData.sendSettings.maxReplyDelayMinutes = valMinutes;
+        
+        // 将分钟转换为秒用于实际延迟计算
+        const maxDelaySeconds = valMinutes * 60;
+        const minDelaySeconds = this.appData.sendSettings.minReplyDelay || 1.5;
+        
+        // 如果最大值（秒）小于最小值（秒），自动同步最小值
+        if (maxDelaySeconds < minDelaySeconds) {
+            const newMinSeconds = maxDelaySeconds;
+            this.appData.sendSettings.minReplyDelay = newMinSeconds;
+            const minSlider = document.getElementById('minDelaySlider');
+            const minDisplay = document.getElementById('minDelayValue');
+            if (minSlider) minSlider.value = newMinSeconds;
+            if (minDisplay) minDisplay.textContent = `${newMinSeconds.toFixed(1)}秒`;
         }
+        
+        this.saveAllData();
+    });
+}
         
         // 外观设置
         const saveAppearanceBtn = document.getElementById('saveAppearanceBtn');
@@ -8236,6 +8502,11 @@ class ChatApp {
 
         // ========== 新增：初始化表情包选择器 ==========
         this.initStickerPicker();
+        // 保存主题设置
+const saveThemeBtn = document.getElementById('saveThemeBtn');
+if (saveThemeBtn) {
+    saveThemeBtn.addEventListener('click', () => this.saveTheme());
+}
     }
     
     restartAutoSending() {
@@ -8248,8 +8519,9 @@ class ChatApp {
         this.renderMessages();
         
         const minDelay = (this.appData.sendSettings?.minReplyDelay || 1.5) * 1000;
-        const maxDelay = (this.appData.sendSettings?.maxReplyDelay || 3.5) * 1000;
-        const delay = minDelay + Math.random() * (maxDelay - minDelay);
+const maxDelayMinutes = this.appData.sendSettings?.maxReplyDelayMinutes || 3;
+const maxDelay = maxDelayMinutes * 60 * 1000;
+const delay = minDelay + Math.random() * (maxDelay - minDelay);
         
         setTimeout(() => {
             this.appData.isTyping = false;
@@ -8616,6 +8888,120 @@ class ChatApp {
         document.body.appendChild(notification);
         setTimeout(() => { if (notification.parentNode) notification.remove(); }, 3000);
     }
+    // 初始化主题卡片（动态渲染）
+initThemeCards() {
+    const container = document.getElementById('themeGrid');
+    if (!container) return;
+    
+    const themeIds = Object.keys(this.themePresets);
+    let html = '';
+    themeIds.forEach(id => {
+        const theme = this.themePresets[id];
+        html += `
+            <div class="theme-preset-card" data-theme="${id}">
+                <div style="height: 70px; background: ${theme.previewGradient};"></div>
+                <div style="padding: 8px; text-align: center; background-color: rgba(0,0,0,0.02);">
+                    <span style="font-size: 0.85rem;">${theme.name}</span>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+    this.attachThemeCardEvents();
+}
+
+attachThemeCardEvents() {
+    const cards = document.querySelectorAll('.theme-preset-card');
+    const currentThemeName = document.getElementById('currentThemeName');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const themeId = card.dataset.theme;
+            cards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            this.currentTheme = themeId;
+            
+            if (currentThemeName) {
+                const themeName = themeId === 'default' ? '默认主题' : this.themePresets[themeId]?.name;
+                currentThemeName.textContent = themeName;
+            }
+            
+            if (!document.documentElement.classList.contains('night-mode')) {
+                this.applyThemePreview(themeId);
+            }
+        });
+    });
+}
+
+applyThemePreview(themeId) {
+    // 先清除所有气泡主题类
+    document.documentElement.classList.remove('bubble-mistyblue');
+    
+    if (themeId === 'default') {
+        this.resetThemePreview();
+        return;
+    }
+    
+    const theme = this.themePresets[themeId];
+    if (!theme) return;
+    
+    // 应用气泡主题类
+    if (theme.bubbleClass) {
+        document.documentElement.classList.add(theme.bubbleClass);
+    }
+    
+    if (theme.rootVars) {
+        Object.keys(theme.rootVars).forEach(key => {
+            document.documentElement.style.setProperty(key, theme.rootVars[key]);
+        });
+    }
+}
+
+resetThemePreview() {
+    const vars = ['--bg-main', '--bg-panel', '--msg-self', '--msg-other', 
+                  '--text', '--accent', '--accent-light', '--accent-gray', 
+                  '--accent-gray-light'];
+    vars.forEach(v => document.documentElement.style.removeProperty(v));
+    
+    // 移除气泡样式
+    document.documentElement.classList.remove('bubble-mistyblue');
+}
+
+saveTheme() {
+    if (this.currentTheme === 'default') {
+        this.resetThemePreview();
+    } else {
+        this.applyThemePreview(this.currentTheme);
+    }
+    this.savedTheme = this.currentTheme;
+    localStorage.setItem('customTheme', this.currentTheme);
+    this.showNotification(`已保存主题：${this.currentTheme === 'default' ? '默认' : this.themePresets[this.currentTheme]?.name}`);
+    
+    // 刷新消息，让气泡样式立即生效
+    this.renderMessages();
+}
+
+loadSavedTheme() {
+    const saved = localStorage.getItem('customTheme');
+    if (saved && this.themePresets[saved]) {
+        this.currentTheme = saved;
+        
+        const card = document.querySelector(`.theme-preset-card[data-theme="${saved}"]`);
+        if (card) card.classList.add('active');
+        
+        const nameSpan = document.getElementById('currentThemeName');
+        if (nameSpan) {
+            nameSpan.textContent = saved === 'default' ? '默认主题' : this.themePresets[saved]?.name;
+        }
+        
+        if (!document.documentElement.classList.contains('night-mode')) {
+            this.applyThemePreview(saved);
+        }
+    } else {
+        const defaultCard = document.querySelector('.theme-preset-card[data-theme="default"]');
+        if (defaultCard) defaultCard.classList.add('active');
+    }
+}
 
     // ========================
     // 新增：表情包选择器功能（从第一个文件移植）
@@ -8811,26 +9197,29 @@ class ChatApp {
     }
 
     savePokeSettings() {
-        const toggle = document.getElementById('pokeEnableToggle');
-        const slider = document.getElementById('pokeFrequencySlider');
-        const textarea = document.getElementById('pokePhrasesTextarea');
+    const toggle = document.getElementById('pokeEnableToggle');
+    const slider = document.getElementById('pokeFrequencySlider');
+    const textarea = document.getElementById('pokePhrasesTextarea');
 
-        if (!this.appData.pokeSettings) {
-            this.appData.pokeSettings = { enabled: true, frequency: 20, phrases: [] };
-        }
-
-        if (toggle) this.appData.pokeSettings.enabled = toggle.checked;
-        if (slider) this.appData.pokeSettings.frequency = parseInt(slider.value);
-
-        const text = textarea.value.trim();
-        const phrases = text ? text.split('\n').map(p => p.trim()).filter(p => p) : [];
-        this.appData.pokeSettings.phrases = phrases.length ? phrases : ["拍了拍你"]; // 保证至少一条
-
-        this.saveAllData();
-        this.showNotification('拍一拍设置已保存');
-        this.updatePokePhraseCount();
-        this.restartPokeScheduler(); // 重启定时器
+    if (!this.appData.pokeSettings) {
+        this.appData.pokeSettings = { enabled: true, frequency: 20, phrases: [] };
     }
+
+    if (toggle) this.appData.pokeSettings.enabled = toggle.checked;
+    if (slider) this.appData.pokeSettings.frequency = parseInt(slider.value);
+
+    const text = textarea.value.trim();
+    const phrases = text ? text.split('\n').map(p => p.trim()).filter(p => p) : [];
+    this.appData.pokeSettings.phrases = phrases.length ? phrases : ["拍了拍你"]; // 保证至少一条
+
+    this.saveAllData();
+    this.showNotification('拍一拍设置已保存');
+    this.updatePokePhraseCount();
+    this.restartPokeScheduler(); // 重启定时器
+    
+    // 添加这一行调试日志
+    console.log('拍一拍设置已保存:', this.appData.pokeSettings);
+}
 
     restartPokeScheduler() {
         if (this.appData.pokeTimer) {
@@ -8841,25 +9230,35 @@ class ChatApp {
     }
 
     startPokeScheduler() {
-        const settings = this.appData.pokeSettings;
-        if (!settings || !settings.enabled || settings.frequency <= 0) return;
+    const settings = this.appData.pokeSettings;
+    if (!settings || !settings.enabled || settings.frequency <= 0) return;
 
-        // 基础检查间隔：5分钟
-        const baseInterval = 300000; // 5分钟
-        this.appData.pokeTimer = setInterval(() => {
-            if (Math.random() * 100 < settings.frequency) {
-                this.sendRandomPokeFromOther();
-            }
-        }, baseInterval);
+    // 临时改为 30秒，便于测试
+    const baseInterval = 10000; // 30秒（测试用，之后可改回300000）
+
+    if (this.appData.pokeTimer) {
+        clearInterval(this.appData.pokeTimer);
     }
+    
+    this.appData.pokeTimer = setInterval(() => {
+        if (Math.random() * 100 < settings.frequency) {
+            console.log('触发对方拍一拍，频率:', settings.frequency);
+            this.sendRandomPokeFromOther();
+        }
+    }, baseInterval);
+}
 
     sendRandomPokeFromOther() {
-        const phrases = this.appData.pokeSettings?.phrases;
-        if (!phrases || phrases.length === 0) return;
-
-        const randomSuffix = phrases[Math.floor(Math.random() * phrases.length)];
-        this.sendPokeMessage('other', randomSuffix);
+    const phrases = this.appData.pokeSettings?.phrases;
+    if (!phrases || phrases.length === 0) {
+        console.log('没有拍一拍文案');
+        return;
     }
+
+    const randomSuffix = phrases[Math.floor(Math.random() * phrases.length)];
+    console.log('发送拍一拍:', randomSuffix); // 添加日志
+    this.sendPokeMessage('other', randomSuffix);
+}
 
     sendPokeMessage(sender = 'self', suffix = null) {
     // 如果没有提供后缀，从文案库随机选一条
@@ -8875,22 +9274,153 @@ class ChatApp {
     // 构建显示文本：直接使用后缀（去除首尾空格）
     const displayText = suffix.trim();
 
-    // 创建拍一拍消息对象
+    // 根据发送者确定完整的拍一拍文案
+    let fullText = '';
+    if (sender === 'self') {
+        const myName = this.appData.selfInfo?.nickname || '我';
+        fullText = `${myName} ${displayText}`;
+    } else {
+        const otherName = this.appData.otherInfo?.nickname || '对方';
+        fullText = `${otherName} ${displayText}`;
+    }
+
+    // 创建拍一拍消息对象 - 使用 type: 'poke'，不要用 isPoke
     const pokeMessage = {
         id: this.dataManager.generateMessageId(),
-        type: 'poke',
-        text: displayText,
+        type: 'poke',           // ← 保持这个
+        text: fullText,          // ← 使用完整文案
         sender: sender,
         time: this.getCurrentTime(),
-        read: true,
-        isPoke: true
+        read: true
+        // 不要加 isPoke 属性
     };
 
     this.appData.messages.push(pokeMessage);
     this.renderMessages();
     this.saveAllData();
 
-    // 拍一拍不触发任何回复逻辑
+    // 如果是自己发送拍一拍，触发对方回复（按比例 字卡80% 表情包10% 拍一拍10%）
+    if (sender === 'self') {
+        this.triggerReplyAfterPoke();
+    }
+}
+
+// ========================
+// 新增：用户发送拍一拍后触发对方回复（字卡40% 表情包30% 拍一拍30%）
+// ========================
+triggerReplyAfterPoke() {
+    // 显示对方正在输入
+    this.appData.waitingForReply = true;
+    this.startTypingIndicator();
+
+    const minDelay = (this.appData.sendSettings?.minReplyDelay || 1.5) * 1000;
+    const maxDelay = (this.appData.sendSettings?.maxReplyDelay || 3.5) * 1000;
+    const delay = minDelay + Math.random() * (maxDelay - minDelay);
+
+    setTimeout(() => {
+        this.stopTypingIndicator();
+
+        // 检查资源可用性
+        let hasPhrase = this.appData.responsePhrases?.length > 0;
+        let hasSticker = this.appData.stickers?.length > 0;
+        let hasPoke = this.appData.pokeSettings?.enabled && this.appData.pokeSettings.phrases?.length > 0;
+
+        // 如果某种资源缺失，重新分配剩余类型的比例
+        let phraseProb = hasPhrase ? 80 : 0;
+        let stickerProb = hasSticker ? 10 : 0;
+        let pokeProb = hasPoke ? 10 : 0;
+
+        // 重新归一化（避免总和为0）
+        const total = phraseProb + stickerProb + pokeProb;
+        if (total === 0) {
+            // 什么都没有，就不回复了
+            return;
+        }
+
+        const rand = Math.random() * total;
+        if (rand < phraseProb) {
+            // 普通词条
+            this.generatePhraseReply();
+        } else if (rand < phraseProb + stickerProb) {
+            // 表情包
+            this.generateStickerReply();
+        } else {
+            // 拍一拍
+            this.generatePokeReply();
+        }
+    }, delay);
+}
+
+// 新增：生成一条对方发送的普通词条消息
+generatePhraseReply() {
+    if (!this.appData.responsePhrases || this.appData.responsePhrases.length === 0) {
+        // 如果没有普通词条，降级为表情包或拍一拍
+        if (this.appData.stickers?.length > 0) {
+            this.generateStickerReply();
+        } else if (this.appData.pokeSettings?.enabled && this.appData.pokeSettings.phrases?.length > 0) {
+            this.generatePokeReply();
+        }
+        return;
+    }
+
+    const randomPhrase = this.appData.responsePhrases[Math.floor(Math.random() * this.appData.responsePhrases.length)];
+    const phraseMessage = {
+        id: this.dataManager.generateMessageId(),
+        text: randomPhrase,
+        sender: 'other',
+        time: this.getCurrentTime(),
+        read: true
+    };
+
+    this.appData.messages.push(phraseMessage);
+    this.renderMessages();
+    this.saveAllData();
+    this.showNotification('对方回复了一条消息');
+}
+
+// 生成一条对方发送的表情包消息
+generateStickerReply() {
+    if (!this.appData.stickers || this.appData.stickers.length === 0) {
+        // 如果没有表情包，降级为拍一拍（如果有）或字卡
+        if (this.appData.pokeSettings?.enabled && this.appData.pokeSettings.phrases?.length > 0) {
+            this.generatePokeReply();
+        } else if (this.appData.tarotSettings?.enabled && this.appData.tarotSettings.customPhrases?.length > 0) {
+            this.generateTarotReply('reply');
+        }
+        return;
+    }
+
+    const randomSticker = this.appData.stickers[Math.floor(Math.random() * this.appData.stickers.length)];
+    const stickerMessage = {
+        id: this.dataManager.generateMessageId(),
+        isSticker: true,
+        stickerData: randomSticker.data,
+        sender: 'other',
+        time: this.getCurrentTime(),
+        read: true
+    };
+
+    this.appData.messages.push(stickerMessage);
+    this.renderMessages();
+    this.saveAllData();
+    this.showNotification('对方发送了一个表情包');
+}
+
+// 生成一条对方发送的拍一拍消息
+generatePokeReply() {
+    const phrases = this.appData.pokeSettings?.phrases;
+    if (!phrases || phrases.length === 0) {
+        // 如果没有拍一拍文案，降级为字卡或表情包
+        if (this.appData.tarotSettings?.enabled && this.appData.tarotSettings.customPhrases?.length > 0) {
+            this.generateTarotReply('reply');
+        } else if (this.appData.stickers?.length > 0) {
+            this.generateStickerReply();
+        }
+        return;
+    }
+
+    const randomSuffix = phrases[Math.floor(Math.random() * phrases.length)];
+    this.sendPokeMessage('other', randomSuffix); // 注意 sender='other' 不会再次触发回复
 }
 }
 
